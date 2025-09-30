@@ -16,7 +16,7 @@ def df_to_excel_bytes(df: pd.DataFrame) -> bytes:
 
 st.set_page_config(page_title="Transaction Comparison", page_icon=":bar_chart:", layout="wide")
 st.title(":bar_chart: Transaction Comparison")
-st.markdown('<style>.div.block-container{padding-top:1rrem;}</style.', unsafe_allow_html=True)
+st.markdown('<style>.div.block-container{padding-top:1rem;}</style.', unsafe_allow_html=True)
 
 # Upload files
 st.sidebar.header("Upload Files")
@@ -83,7 +83,7 @@ if week1_file and week2_file:
         comparison.style.format(na_rep="-")
     )
 
-     # --- Two side-by-side bar charts ---
+    #bar chart side by side
     st.subheader("🔍 Visual Comparison")
     melted = comparison.melt(id_vars=["SHEET"])
     melted.columns = ["SHEET", "Metric", "Amount"]
@@ -200,7 +200,7 @@ if week1_file and week2_file:
         f"VALUE_{week1_label}": "{:,.0f}", f"VALUE_{week2_label}": "{:,.0f}"
     }))
 
-    # ====== TABLE 3: DIFFERENCES ======
+    #difference table
     diff_table = region_comparison[["REGION", "VOL_DIFF", "VOL_%CHANGE", "VAL_DIFF", "VAL_%CHANGE"]].copy()
     diff_total = pd.DataFrame([{
         "REGION": "TOTAL",
@@ -290,9 +290,8 @@ if week1_file and week2_file:
         "VOL_DIFF": "{:,.0f}", "VOL_%CHANGE": "{:.2f}%",
         "VAL_DIFF": "{:,.0f}", "VAL_%CHANGE": "{:.2f}%"
     }))
-    # ==========================
-    # DOWNLOAD ALL TABLES AS ZIP
-    # ==========================
+
+    #download tables as zip file
     if week1_file and week2_file:
         zip_buffer = io.BytesIO()
         with zipfile.ZipFile(zip_buffer, "w") as zf:
