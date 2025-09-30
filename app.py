@@ -16,7 +16,7 @@ def df_to_excel_bytes(df: pd.DataFrame) -> bytes:
 
 st.set_page_config(page_title="Transaction Comparison", page_icon=":bar_chart:", layout="wide")
 st.title(":bar_chart: Transaction Comparison")
-st.markdown('<style>div.block-container{padding-top:1rem;}</style>', unsafe_allow_html=True)
+st.markdown('<style>div.block-container{padding-top:2rem;}</style>', unsafe_allow_html=True)
 
 # Upload files
 st.sidebar.header("Upload Files")
