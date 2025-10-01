@@ -1,0 +1,26 @@
+name: Keep Streamlit App Alive (main branch)
+
+on:
+  schedule:
+    - cron: '0 */10 * * *'   # every 10 hours
+  workflow_dispatch:         # manual trigger option
+
+permissions:
+  contents: write
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Make empty commit on main
+        run: |
+          git config user.name "keepalive-bot"
+          git config user.email "keepalive@example.com"
+          git commit --allow-empty -m "keepalive: $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+          git push origin main
